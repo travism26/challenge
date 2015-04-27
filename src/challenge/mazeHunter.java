@@ -58,7 +58,6 @@ public class mazeHunter {
 				int node = cloud.get(i);
 				ArrayList<Integer> currentPath = new ArrayList<Integer>();
 				currentPath.addAll(shortestPath.get(node));
-				// println("--------" + node);
 				for (int[] vertice : vertex)
 				{
 					// Arrays.asList(vertice).contains(node) <-- not working for
@@ -71,8 +70,6 @@ public class mazeHunter {
 						{
 							if (nextShortest == -1)
 							{
-								// this means it found first vertex. make it
-								// shortest node
 								nextShortest = toNode;
 								currentPath.add(toNode);
 								path = currentPath;
@@ -100,6 +97,41 @@ public class mazeHunter {
 
 		return shortestPath;
 	}
+	
+	public int[] parseData(String data)
+	{
+		String[] parts;
+		int results[];
+		int index;
+
+		parts = data.split(",");
+		results = new int[parts.length];
+		for (index = 0; index < parts.length; ++index)
+		{
+			results[index] = Integer.parseInt(parts[index].trim());
+		}
+
+		return results;
+	}
+	
+	public String findSolution(HashMap<Integer, ArrayList<Integer>> shortestPath, int mazeSize){
+		String solution = "";
+		int exitDoor = mazeSize * mazeSize -1;
+		for (Map.Entry<Integer, ArrayList<Integer>> entry : shortestPath
+				.entrySet())
+		{
+			if (entry.getKey()== exitDoor)
+			{
+				solution=entry.getKey() + " | " + listPrint(entry.getValue());
+			}
+			//println(entry.getKey() + " | " + listPrint(entry.getValue()));
+			
+		}
+		if(solution.isEmpty()){
+			solution = "Unreachable exit :(";
+		}
+		return solution;
+	}
 
 	public static void main(String[] args)
 	{
@@ -107,7 +139,10 @@ public class mazeHunter {
 		mazeHunter meh = new mazeHunter();
 		Scanner in = new Scanner(System.in);
 		ArrayList<String> inputValues = new ArrayList<String>();
+		int mazeSize =0;
 		String input;
+		input = in.nextLine();
+		mazeSize = Integer.parseInt(input);
 		while (true)
 		{
 			input = in.nextLine();
@@ -125,50 +160,21 @@ public class mazeHunter {
 		{
 			vertices[i] = meh.parseData(inputValues.get(i));
 		}
-
+		
+		//used for testing :)
 		int[][] vertex = { { 0, 3 }, { 2, 5 }, { 3, 4 }, { 4, 5 }, { 4, 7 },
-				{ 7, 8 }, { 5, 8 } };
+				{ 7, 8 }, { 5, 8 }, {8,10}, {10,15} };
 
 		HashMap<Integer, ArrayList<Integer>> shortestPath = new HashMap<Integer, ArrayList<Integer>>();
 
 		shortestPath = meh.getShortestPath(vertices, 0);
-
-		for (Map.Entry<Integer, ArrayList<Integer>> entry : shortestPath
-				.entrySet())
-		{
-			println(entry.getKey() + "| " + listPrint(entry.getValue()));
-		}
+		String solution = meh.findSolution(shortestPath, mazeSize);
+		
+		//answer
+		println(solution);
 	}
 
 	// Methods used for testing
-
-	public int[] parseData(String data)
-	{
-		String[] parts;
-		int results[];
-		int index;
-
-		parts = data.split(",");
-		results = new int[parts.length];
-		for (index = 0; index < parts.length; ++index)
-		{
-			results[index] = Integer.parseInt(parts[index].trim());
-		}
-
-		return results;
-	}
-
-	public static boolean isParseable(String str)
-	{
-		try
-		{
-			Integer.parseInt(str);
-			return true;
-		} catch (NumberFormatException e)
-		{
-			return false;
-		}
-	}
 
 	public static void printInputDate(int[][] input)
 	{
