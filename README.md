@@ -1,5 +1,5 @@
 # challenge
-programming challenge give by GIT 
+programming challenge 
 
 ##Getting started
 
