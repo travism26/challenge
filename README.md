@@ -9,7 +9,7 @@ programming challenge give by GIT
 3. To finish just enter an empty value in other words just press enter. 
 
 ####Input example
-3
-0,3
-3,4
-4,5
+3 <br/>
+0,3 <br/>
+3,4 <br/>
+4,5<br/>
