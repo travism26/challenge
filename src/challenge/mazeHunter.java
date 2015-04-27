@@ -35,7 +35,7 @@ public class mazeHunter {
 		return nodes;
 	}
 
-	//Dijkstra's Algorithm.
+	// Dijkstra's Algorithm.
 	public HashMap<Integer, ArrayList<Integer>> getShortestPath(int[][] vertex,
 			int mazeSize)
 	{
@@ -43,12 +43,12 @@ public class mazeHunter {
 		HashMap<Integer, ArrayList<Integer>> shortestPath = new HashMap<Integer, ArrayList<Integer>>();
 		ArrayList<Integer> cloud = new ArrayList<Integer>();
 		ArrayList<Integer> nodes = new ArrayList<>();
-		
+
 		shortestPath.put(0, new ArrayList<Integer>());
 		shortestPath.get(0).add(0);
 		cloud.add(0);
 		nodes = findAllNodes(vertex);
-		
+
 		while (isDone == false)
 		{
 			ArrayList<Integer> path = new ArrayList<Integer>();
@@ -91,7 +91,7 @@ public class mazeHunter {
 				shortestPath.put(nextShortest, path);
 				cloud.add(nextShortest);
 			}
-			
+
 			if (nodes.size() == cloud.size())
 			{
 				isDone = true;
@@ -100,60 +100,64 @@ public class mazeHunter {
 
 		return shortestPath;
 	}
-	
+
 	public static void main(String[] args)
 	{
-		
+
 		mazeHunter meh = new mazeHunter();
 		Scanner in = new Scanner(System.in);
 		ArrayList<String> inputValues = new ArrayList<String>();
 		String input;
-		while(true) {
-		    input = in.nextLine();
-		    if(input.isEmpty()) {
-		        break;
-		    }
-		    else {
-		    	inputValues.add(input);
-		    }
+		while (true)
+		{
+			input = in.nextLine();
+			if (input.isEmpty())
+			{
+				break;
+			} else
+			{
+				inputValues.add(input);
+			}
 		}
 		int[][] vertices = new int[inputValues.size()][2];
-		//parse the data
+		// parse the data
 		for (int i = 0; i < vertices.length; i++)
 		{
 			vertices[i] = meh.parseData(inputValues.get(i));
 		}
-		
-		
+
 		int[][] vertex = { { 0, 3 }, { 2, 5 }, { 3, 4 }, { 4, 5 }, { 4, 7 },
 				{ 7, 8 }, { 5, 8 } };
 
 		HashMap<Integer, ArrayList<Integer>> shortestPath = new HashMap<Integer, ArrayList<Integer>>();
 
 		shortestPath = meh.getShortestPath(vertices, 0);
+
 		for (Map.Entry<Integer, ArrayList<Integer>> entry : shortestPath
 				.entrySet())
 		{
 			println(entry.getKey() + "| " + listPrint(entry.getValue()));
 		}
 	}
-	
-	//Methods used for testing
-	
-	
-	public int[] parseData(String data){
+
+	// Methods used for testing
+
+	public int[] parseData(String data)
+	{
 		String[] parts;
 		int results[];
 		int index;
 
 		parts = data.split(",");
 		results = new int[parts.length];
-		for (index = 0; index < parts.length; ++index) {
-		    results[index] = Integer.parseInt(parts[index].trim());
+		for (index = 0; index < parts.length; ++index)
+		{
+			results[index] = Integer.parseInt(parts[index].trim());
 		}
-		
+
 		return results;
 	}
+
 	public static boolean isParseable(String str)
 	{
 		try
@@ -165,7 +169,9 @@ public class mazeHunter {
 			return false;
 		}
 	}
-	public static void printInputDate(int[][] input){
+
+	public static void printInputDate(int[][] input)
+	{
 		for (int i = 0; i < input.length; i++)
 		{
 			System.out.println();
@@ -174,8 +180,9 @@ public class mazeHunter {
 				System.out.print(input[i][j] + " ");
 			}
 		}
-		
+
 	}
+
 	public static int[][] setMaze(int[][] mazeIn)
 	{
 		int val = 0;
