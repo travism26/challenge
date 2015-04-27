@@ -41,7 +41,7 @@ public class mazeHunterTest {
 		shortestPath = maze.getShortestPath(vertex, 0);
 		String solution = maze.findSolution(shortestPath, mazeSize);
 		System.out.println(solution);
-		assertEquals("Expect: 8 | 0 3 4 7 8 ", "15 | 0 3 4 7 8 10 15 ", solution);
+		assertEquals("15 | 0 3 4 7 8 10 15 ", "15 | 0 3 4 7 8 10 15 ", solution);
 	}
 	
 	@Test
@@ -51,7 +51,7 @@ public class mazeHunterTest {
 		shortestPath = maze.getShortestPath(vertex, 0);
 		String solution = maze.findSolution(shortestPath, mazeSize);
 		System.out.println(solution);
-		assertEquals("Expect: 8 | 0 3 4 7 8 ", "24 | 0 3 4 7 8 10 14 24 ", solution);
+		assertEquals("Expect: 24 | 0 3 4 7 8 10 14 24 ", "24 | 0 3 4 7 8 10 14 24 ", solution);
 	}
 
 }
